@@ -11,7 +11,7 @@ successfull_tests=0
 
 check_norminette()
 {
-    norminette $(pwd) > out
+    norminette ../src ../includes > out
     if <out grep -q "Error"; then
         echo -e "Norminette :" $RED"KO"$NC
     else
@@ -22,7 +22,7 @@ check_norminette()
 
 check_compilation()
 {
-    make re > out
+    make re -C ../ > out
     if [ $? -ne 0 ]; then
         echo -e "Compilation :" $RED"KO"$NC
         rm out
