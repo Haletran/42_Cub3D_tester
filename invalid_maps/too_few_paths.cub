@@ -1,6 +1,6 @@
-NO ./textures/wall0.jpg
-SO ./textures/wall1.jpg
-WE ./textures/wall2.jpg
+NO ../images/mossy.png
+SO ../images/colorstone.png
+WE ../images/redbrick.png
 
 F 220,100,0
 C 225,30,0

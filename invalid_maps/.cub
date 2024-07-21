@@ -1,7 +1,7 @@
-NO IMG/Wolfenstein/bluestone.png
-SO IMG/Wolfenstein/greystone.png
-WE IMG/Wolfenstein/wood.png
-EA IMG/Wolfenstein/redbrick.png
+NO ../images/mossy.png
+SO ../images/colorstone.png
+WE ../images/redbrick.png
+EA ../images/eagle.png
 
 F 0,0,0
 C 0,0,0
