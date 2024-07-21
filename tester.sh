@@ -6,7 +6,7 @@ RED='\033[0;31m'
 NC='\033[0m'
 BOLD='\033[1m'
 BOLD_CYAN='\033[1;36m'
-total_tests=0
+total=0
 successfull_tests=0
 
 check_norminette()
@@ -35,28 +35,35 @@ check_compilation()
 
 map_tester()
 {
-    if [ ! -f cub3D ]; then
+    if [ ! -f ../cub3D ]; then
         echo -e $RED"Cub3d executable not found..."$NC
         exit 1
     fi
 
     ls invalid_maps/* > invalid
+    mv ../cub3D .
+    cp -R ../MacroLibX .
+
+    nb_of_maps=$(wc -l invalid | awk '{print $1}')
 
     cat invalid | while read line; do
-        ((total_tests++))
         echo -e $BOLD_CYAN"Testing map $line"$NC
         ./cub3D $line > out
         if <out grep -q "Error"; then
-            echo -e "Map $line :" $RED"KO"$NC
-            ((successfull_tests++))
-        else
             kill $(pidof cub3D)
+            echo -e "Map $line :" $RED"KO"$NC
+        else
+            ((successfull_tests++))
             echo -e "Map $line :" $GREEN"OK"$NC
         fi
+        ((total++))
+        echo -e "\nTotal :" $MAGENTA"$successfull_tests/$total"$NC > total
         rm out
-        rm invalid
     done
-    echo -e $BOLD_CYAN_CYAN $successfull_tests "/" $total_tests " tests passed"$NC
+    cat total
+    rm invalid
+    rm -rf MacroLibX
+    rm cub3D
 }
 
 check_norminette
