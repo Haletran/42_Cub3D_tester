@@ -49,12 +49,12 @@ map_tester()
     cat invalid | while read line; do
         echo -e $BOLD_CYAN"Testing map $line"$NC
         ./cub3D $line > out
-        if <out grep -q "Error"; then
+        if <out | sed 's/\x1b\[[0-9;]*m//g' | grep -q "Error"; then
             ((successfull_tests++))
             echo -e "Map $line :" $GREEN"OK"$NC
         else
             kill $(pidof cub3D)
-            echo -e "Map $line :" $RED"OK"$NC
+            echo -e "Map $line :" $RED"KO"$NC
         fi
         ((total++))
         echo -e "\nTotal :" $MAGENTA"$successfull_tests/$total"$NC > total
