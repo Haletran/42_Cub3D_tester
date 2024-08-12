@@ -1,8 +1,8 @@
-NO ./textures/wall0.jpg
-SO ./textures/wall1.jpg
+NO ../images/mossy.png
+SO ../images/colorstone.png
 
-WE ./textures/wall2.jpg
-EA ./textures/wall3.jpg
+WE ../images/redbrick.png
+EA ../images/eagle.png
 
 
 

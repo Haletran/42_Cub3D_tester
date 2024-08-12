@@ -1,12 +1,11 @@
-EA ./textures/wall3.jpg
+EA ../images/eagle.png
 
-SO ./textures/wall1.jpg
+SO ../images/colorstone.png
 
-WE ./textures/wall2.jpg
+WE ../images/redbrick.png
 F 220,100,0
 C 225,30,0
-NO ./textures/wall0.jpg
-
+NO ../images/mossy.png
 
 11111
 10001
