@@ -47,13 +47,13 @@ map_tester()
     nb_of_maps=$(wc -l invalid | awk '{print $1}')
 
     cat invalid | while read line; do
-        echo -e $BOLD_CYAN"Testing map $line"$NC
-        ./cub3D $line > out
-        if <out | sed 's/\x1b\[[0-9;]*m//g' | grep -q "Error"; then
+        #echo -e $BOLD_CYAN"Testing map $line"$NC
+        ./cub3D $line > out 2>&1
+        if cat out | sed 's/\x1b\[[0-9;]*m//g' | grep -q "Error"; then
             ((successfull_tests++))
+            cat out
             echo -e "Map $line :" $GREEN"OK"$NC
         else
-            kill $(pidof cub3D)
             echo -e "Map $line :" $RED"KO"$NC
         fi
         ((total++))
@@ -61,6 +61,7 @@ map_tester()
         rm out
     done
     cat total
+    rm total
     rm invalid
     rm -rf MacroLibX
     rm cub3D
