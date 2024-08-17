@@ -18,7 +18,8 @@ bash tester.sh
 ```
 
 This tester mainly work with [MacroLibX](https://macrolibx.kbz8.me./), but you can
-change variables in the code to make it work.
+change variables in the code to make it work. And you might have to change the images in
+the images folder since they are only in ***.png***.
 
 ## License
 
