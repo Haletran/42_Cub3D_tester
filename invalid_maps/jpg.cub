@@ -1,7 +1,7 @@
-NO ../images/mossy.png
-SO ../images/colorstone.png
-WE ../images/redbrick.png
-EA ../images/eagle.png
+NO ../images/mossy.jpg
+SO ../images/colorstone.jpg
+WE ../images/redbrick.jpg
+EA ../images/eagle.xpm
 
 F 220,100,0
 C 225,30,0

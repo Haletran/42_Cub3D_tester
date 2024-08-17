@@ -1,7 +1,7 @@
-NO ../images/mossy.png
+NO mossy.png
 SO ../images/colorstone.png
 WE ../images/redbrick.png
-EA ../images/eagle.png
+ED .test
 
 F 220,100,0
 C 225,30,0
