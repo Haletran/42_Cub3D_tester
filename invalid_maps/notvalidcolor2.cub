@@ -3,7 +3,7 @@ SO ../images/colorstone.png
 WE ../images/redbrick.png
 EA ../images/eagle.png
 
-F 220,100,0
+F 255,100,0
 
         1111111111111111111111111
         1000000000110000000000001
