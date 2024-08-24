@@ -5,6 +5,7 @@ path="../MacroLibX"
 lib_name="MacroLibX" 
 KEEP=0 ## set to 1 if you want to keep the lib directory and the cub3D executable
 CHECKER=1 ## add norm and compilation check
+suppresion_file=$path"/valgrind.supp" #path to the suppression file
 
 ## PROGRAM VARIABLES
 MAGENTA='\033[0;35m'
@@ -17,6 +18,7 @@ BOLD='\033[1m'
 BOLD_CYAN='\033[1;36m'
 total=0
 successfull_tests=0
+valgrind=""
 
 clean()
 {
@@ -87,15 +89,34 @@ setup_tester()
     nb_of_maps=$(wc -l invalid | awk '{print $1}')
     successfull_tests=0
     total=0
+    read  -p "Do you want to use valgrind on invalid maps ? [y/n] " valgrind
+    if [ $valgrind = "y" ]; then
+        if ! command -v valgrind &> /dev/null; then
+            echo -e $RED"-> Valgrind isn't installed on your system"$NC
+            exit 1
+        fi
+        read -p "Do you want to use valgrind suppression file ? [y/n] " valgrind
+        if [ $valgrind = "y" ]; then
+            if [ ! -f $suppresion_file ]; then
+                echo -e $RED"-> Valgrind suppression file not found"$NC
+                exit 1
+            fi
+            valgrind="valgrind --leak-check=full --track-fds=yes --suppressions="$suppresion_file
+        else
+            valgrind="valgrind --leak-check=full --track-fds=yes"
+        fi
+    else
+        valgrind=""
+    fi
 }
 
 map_tester()
 {
     setup_tester
-    ## Invalid maps
+    ## Invalid map
     echo -e $BOLD_CYAN"\n--Invalid maps tests--\n"$NC
     while read -r line; do
-        ./cub3D "$line" > out 2>&1
+        $valgrind ./cub3D "$line" > out 2>&1
         if sed 's/\x1b\[[0-9;]*m//g' out | grep -q "Error"; then
             ((successfull_tests++))
             cat out
@@ -120,7 +141,6 @@ map_tester()
         ((total++))
         rm out
     done < valid
-    
     echo -e "\nTotal :" $MAGENTA"$successfull_tests/$total"$NC 
     clean
 }
